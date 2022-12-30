@@ -1,0 +1,43 @@
+#root {
+  max-width: 100vw;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #212121
+}
+
+body{
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #212121
+}
+.text-white {
+  color: #ffffff;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-center {
+  text-align: center;
+}
+
+.noBorder{
+  border: none;
+}
+.trHead{
+  background-color: #1c1c1c;
+}
+.trMain{
+  color: white;
+  border-bottom: 1px solid #272626
+}
+.bgDark{
+  background-color: #212121 !important;
+  color: #ffffff !important;
+
+}
