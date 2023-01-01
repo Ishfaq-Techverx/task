@@ -3,7 +3,8 @@ import { useCustomHook } from "./userProvider";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 const Forms = ({ noBox }) => {
-  const { state, dispatch, sectorOptions } = useCustomHook();
+  const { state, dispatch, options } = useCustomHook();
+
   const [record, setRecord] = useState({
     name: state?.open ? state?.list[state?.currentRecord]?.name : "",
     sectors: state?.open
@@ -11,52 +12,55 @@ const Forms = ({ noBox }) => {
       : "Manufacturing",
     agreement: false,
   });
-  const options = sectorOptions.map(({ name, value }) => (
-    <option key={value} value={name}>
-      {name}
-    </option>
-  ));
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (state?.open) {
-      dispatch({
-        type: "UPDATE",
-        payload: {
-          record,
-          id: state.currentRecord,
-          message: "Saved",
-          toastOpen: true,
-        },
-      });
-    } else {
-      if (!record?.name || !record?.sectors || !record?.agreement) {
-        setRecord({ ...record, sectors: "Manufacturing" });
-        dispatch({
-          type: "TOAST",
-          payload: {
-            message: `PLease Validate ${
-              !record?.name
-                ? "Name"
-                : !record?.sectors
-                ? "Select Sectors"
-                : "Check agreement"
-            }`,
-            toastOpen: true,
-          },
-        });
-        return;
-      } else {
-        dispatch({
-          type: "ADD",
-          payload: { record, message: "Saved", toastOpen: true },
-        });
-      }
-    }
-    setRecord({});
+
+  const handleUpdate = () => {
+    dispatch({
+      type: "UPDATE",
+      payload: {
+        record,
+        id: state.currentRecord,
+        message: "Saved",
+        toastOpen: true,
+      },
+    });
+    dispatch({ type: "TOGGLE" });
+  };
+
+  const handleToastError = () => {
+    dispatch({
+      type: "TOAST",
+      payload: {
+        message: `PLease Validate ${
+          !record?.name
+            ? "Name"
+            : !record?.sectors
+            ? "Select Sectors"
+            : "Check agreement"
+        }`,
+        toastOpen: true,
+      },
+    });
+  };
+
+  const handleAddRecord = (e) => {
+    dispatch({
+      type: "ADD",
+      payload: { record, message: "Saved", toastOpen: true },
+    });
+    setRecord({ sectors: "Manufacturing" });
     e.target[0].value = "";
     e.target[2].checked = false;
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (state.open) {
-      dispatch({ type: "TOGGLE" });
+      handleUpdate();
+    } else {
+      if (!record?.name || !record?.sectors || !record?.agreement) {
+        handleToastError();
+      } else {
+        handleAddRecord(e);
+      }
     }
   };
   return (
@@ -82,7 +86,6 @@ const Forms = ({ noBox }) => {
           className="mb-3"
           aria-label="Default select"
           onChange={(e) => {
-            console.log("s::", e.target.name);
             setRecord({ ...record, sectors: e.target.value });
           }}
         >
@@ -97,15 +100,11 @@ const Forms = ({ noBox }) => {
             }}
             type="checkbox"
             label="Agree the Terms"
-            style={{ color: "white" }}
+            className="check"
           />
         </Form.Group>
       ) : null}
-      <Button
-        variant="primary"
-        type="submit"
-        style={{ width: "-webkit-fill-available" }}
-      >
+      <Button variant="primary" type="submit" className="btnWidth">
         Save
       </Button>
     </Form>

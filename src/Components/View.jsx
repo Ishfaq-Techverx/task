@@ -31,7 +31,10 @@ const View = () => {
             <button
               className="mr-4 noBorder"
               onClick={() => {
-                dispatch({ type: "DELETE", payload: {id:i,message: "Deleted", toastOpen: true } });
+                dispatch({
+                  type: "DELETE",
+                  payload: { id: i, message: "Deleted", toastOpen: true },
+                });
               }}
             >
               <svg

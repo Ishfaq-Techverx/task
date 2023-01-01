@@ -8,7 +8,6 @@ import Forms from "./Components/Form";
 import Toast from "./Components/Toast";
 import View from "./Components/View";
 function App() {
-
   const { state, dispatch } = useCustomHook();
   useEffect(() => {
     if (state?.toastOpen) {

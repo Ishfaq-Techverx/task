@@ -7,6 +7,7 @@ const initialState = {
   message: "",
   toastOpen: false,
 };
+
 const sectorOptions = [
   {
     name: "Manufacturing",
@@ -148,10 +149,17 @@ export const UserProvider = ({ children }) => {
     </SectorContext.Provider>
   );
 };
+const options = sectorOptions.map(({ name, value }) => (
+  <option key={value} value={name}>
+    {name}
+  </option>
+));
+
 export const useCustomHook = () => {
   const userData = useContext(SectorContext);
   const { state, dispatch } = userData;
+
   if (userData === "undefined")
-    throw new Error("Component should be inside context");
-  return { state, dispatch, sectorOptions };
+    throw Error("Component should be inside context");
+  return { state, dispatch, options, UserProvider };
 };

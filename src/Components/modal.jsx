@@ -12,12 +12,8 @@ const Example = () => {
       animation
       centered
       contentClassName="bgDark"
-      // contentClassName="bgDark"
-      // style={{backgroundColor: "#transparent"}}
     >
-      <Modal.Header closeButton
-      closeVariant
-      >
+      <Modal.Header closeButton closeVariant>
         <Modal.Title>Edit Your Information</Modal.Title>
       </Modal.Header>
       <Modal.Body>

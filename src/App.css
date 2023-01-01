@@ -3,14 +3,14 @@
   margin: 0 auto;
   min-height: 100vh;
   padding: 2rem;
-  background-color: #212121
+  background-color: #212121;
 }
 
-body{
+body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #212121
+  background-color: #212121;
 }
 .text-white {
   color: #ffffff;
@@ -26,18 +26,25 @@ body{
   text-align: center;
 }
 
-.noBorder{
+.noBorder {
   border: none;
 }
-.trHead{
+.trHead {
   background-color: #1c1c1c;
 }
-.trMain{
+.trMain {
   color: white;
-  border-bottom: 1px solid #272626
+  border-bottom: 1px solid #272626;
 }
-.bgDark{
+.bgDark {
   background-color: #212121 !important;
   color: #ffffff !important;
-
+}
+.btnWidth {
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+}
+.check {
+  color: #ffffff;
 }
