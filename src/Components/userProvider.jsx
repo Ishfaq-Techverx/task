@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useReducer } from "react";
+import React, { useContext, createContext, useReducer } from "react";
 const SectorContext = createContext();
 const initialState = {
   list: [],
